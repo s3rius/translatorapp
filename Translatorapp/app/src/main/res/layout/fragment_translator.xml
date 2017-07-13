@@ -1,0 +1,82 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ru.s3sqat.s3rius.translatorapp.Fragments.Translator">
+
+    <RelativeLayout
+        android:id="@+id/topPanel"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:id="@+id/swapImg"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/swapp" />
+
+        <Spinner
+            android:id="@+id/spinnerFrom"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toStartOf="@id/swapImg">
+
+        </Spinner>
+
+        <Spinner
+            android:id="@+id/spinnerTo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toEndOf="@id/swapImg">
+
+        </Spinner>
+
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/textToTranslate"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@+id/topPanel"
+        android:layout_margin="5dp"
+        android:background="@drawable/edit_text_shape"
+        android:gravity="start"
+        android:hint="@string/enterText"
+        android:padding="5dp" />
+
+    <ImageView
+        android:id="@+id/bookmarkTranslate"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/textToTranslate"
+        android:src="@drawable/bookmark_big" />
+
+    <TextView
+        android:id="@+id/translation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/bookmarkTranslate"
+        android:layout_below="@id/textToTranslate"
+        android:layout_toStartOf="@id/bookmarkTranslate"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignEnd="@id/translation"
+        android:layout_below="@id/bookmarkTranslate"
+        android:id="@+id/dictionary">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

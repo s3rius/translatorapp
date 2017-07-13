@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Translator app</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="enterText">Please enter text to translate</string>
+    <string name="getLangs">https://translate.yandex.net/api/v1.5/tr.json/getLangs</string>
+    <string name="translate">https://translate.yandex.net/api/v1.5/tr.json/translate</string>
+    <string name="lookUp">https://dictionary.yandex.net/api/v1/dicservice.json/lookup</string>
+    <string name="getDictionaryLangs">https://dictionary.yandex.net/api/v1/dicservice.json/getLangs</string>
+    <string name="translateKey">trnsl.1.1.20170629T043040Z.9df16bdae866525e.ec9da4f1e92086e2edea39f9792efb648dd46c79</string>
+    <string name="dictionaryKey">dict.1.1.20170712T165810Z.5ca0ba733800eb39.9862a16ff4090fc57eafe5b165e2caacbab8d587</string>
+    <string name="error">Something went wrong</string>
+</resources>
