@@ -4,4 +4,8 @@
     <color name="colorPrimaryDark">#ffdc61</color>
     <color name="colorAccent">#FF4081</color>
     <color name="black">#000</color>
+    <color name="blumine">#7894f5</color>
+    <color name="grey">#9e9d9d</color>
+    <color name="brown">#af886a</color>
+    <color name="lightRed">#d9a296</color>
 </resources>

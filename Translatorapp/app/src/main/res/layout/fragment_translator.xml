@@ -35,48 +35,59 @@
 
     </RelativeLayout>
 
-    <EditText
-        android:id="@+id/textToTranslate"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_below="@+id/topPanel"
-        android:layout_margin="5dp"
-        android:background="@drawable/edit_text_shape"
-        android:gravity="start"
-        android:hint="@string/enterText"
-        android:padding="5dp" />
-
-    <ImageView
-        android:id="@+id/bookmarkTranslate"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@id/textToTranslate"
-        android:src="@drawable/bookmark_big" />
-
-    <TextView
-        android:id="@+id/translation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/bookmarkTranslate"
-        android:layout_below="@id/textToTranslate"
-        android:layout_toStartOf="@id/bookmarkTranslate"
-        android:textSize="16sp"
-        android:textStyle="bold" />
-
-    <ScrollView
+    <RelativeLayout
+        android:id="@+id/focusLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignEnd="@id/translation"
-        android:layout_below="@id/bookmarkTranslate"
-        android:id="@+id/dictionary">
+        android:layout_below="@+id/topPanel"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
 
-        <LinearLayout
+        <ru.s3sqat.s3rius.translatorapp.EditText2
+            android:id="@+id/textToTranslate"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="100dp"
 
-        </LinearLayout>
+            android:layout_margin="5dp"
+            android:background="@drawable/edit_text_shape"
+            android:gravity="start"
+            android:hint="@string/enterText"
+            android:padding="5dp" />
 
-    </ScrollView>
+        <ImageView
+            android:id="@+id/bookmarkTranslate"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/textToTranslate"
+            android:src="@drawable/bookmark_big" />
 
+        <TextView
+            android:id="@+id/translation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/bookmarkTranslate"
+            android:layout_below="@id/textToTranslate"
+            android:layout_toStartOf="@id/bookmarkTranslate"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <ScrollView
+            android:id="@+id/dictionary"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignEnd="@id/translation"
+            android:layout_below="@id/bookmarkTranslate"
+            android:layout_marginStart="10dp">
+
+            <LinearLayout
+                android:id="@+id/dictionaryLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+        </ScrollView>
+    </RelativeLayout>
 </RelativeLayout>

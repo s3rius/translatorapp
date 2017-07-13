@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cardView"
+    android:layout_width="match_parent"
+    android:layout_height="60dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/bookmarkCard"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/bookmark_big" />
+
+        <TextView
+            android:id="@+id/directionCard"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toStartOf="@id/bookmarkCard"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/sourceCard"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_toStartOf="@id/directionCard"
+            android:maxLength="25"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/translationCard"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@id/sourceCard"
+            android:layout_toStartOf="@id/directionCard"
+            android:maxLength="25"
+            android:textColor="@color/grey"
+            android:textSize="18sp" />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

@@ -12,4 +12,10 @@
     <string name="translateKey">trnsl.1.1.20170629T043040Z.9df16bdae866525e.ec9da4f1e92086e2edea39f9792efb648dd46c79</string>
     <string name="dictionaryKey">dict.1.1.20170712T165810Z.5ca0ba733800eb39.9862a16ff4090fc57eafe5b165e2caacbab8d587</string>
     <string name="error">Something went wrong</string>
+    <string name="exs">daylight saving time - летнее время\ntake some time - занять некоторое время\nreal time mode - режим реального времени\nexpected arrival time - ожидаемое время прибытия\nexternal time source - внешний источник времени</string>
+    <string name="means">(period, once, moment, pore)</string>
+    <string name="syns">время ср, раз м, момент м, срок м, пора, период м</string>
+    <string name="translations">Translations</string>
+    <string name="bookmarks">Bookmarks</string>
+    <string name="cantMark">Can\'t bookmark the translation, try again later</string>
 </resources>
