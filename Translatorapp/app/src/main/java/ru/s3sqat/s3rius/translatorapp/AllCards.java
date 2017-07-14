@@ -22,6 +22,7 @@ public class AllCards {
     public static ArrayList<Card> cards;
     public static BookmarkAdapter bookmarkAdapter;
     public static CardsAdapter cardsAdapter;
+    public static boolean detectHint;
     private static boolean useDictionary;
     private static ObjectMapper mapper = new ObjectMapper();
     private static SharedPreferences sharedPreferences;
@@ -32,6 +33,15 @@ public class AllCards {
     private static boolean posFilter;
     private static int flags;
     private static Context context;
+
+    public static boolean isDetectHint() {
+        return detectHint;
+    }
+
+    public static void setDetectHint(boolean detectHint) {
+        AllCards.detectHint = detectHint;
+        saveFlags();
+    }
 
     public static Context getContext() {
         return context;
@@ -60,7 +70,8 @@ public class AllCards {
         editor.putBoolean("familyFilter", familyFilter);
         editor.putBoolean("morpho", morpho);
         editor.putBoolean("posFilter", posFilter);
-
+        editor.putBoolean("detectHint", detectHint);
+        editor.apply();
     }
 
     static void loadValues() {
@@ -79,6 +90,7 @@ public class AllCards {
         familyFilter = sharedPreferences.getBoolean("familyFilter", true);
         morpho = sharedPreferences.getBoolean("morpho", true);
         posFilter = sharedPreferences.getBoolean("posFilter", false);
+        detectHint = sharedPreferences.getBoolean("detectHint", true);
         createMask();
         bookmarkAdapter = new BookmarkAdapter();
         cardsAdapter = new CardsAdapter();

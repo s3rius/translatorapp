@@ -40,9 +40,9 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.Holder> {
         holder.bookmark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AllCards.changeMark(position);
-                AllCards.notifyBookmarkChanged(position);
-                notifyItemChanged(position);
+                AllCards.changeMark(holder.getPosition());
+                AllCards.notifyBookmarkChanged(holder.getPosition());
+                notifyItemChanged(holder.getPosition());
             }
         });
         holder.card.setOnLongClickListener(new View.OnLongClickListener() {
@@ -57,9 +57,9 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.Holder> {
                         .setPositiveButton(AllCards.getContext().getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                AllCards.removeCard(position);
-                                notifyItemRemoved(position);
-                                AllCards.notifyBookmarkRemoved(position);
+                                AllCards.removeCard(holder.getPosition());
+                                notifyItemRemoved(holder.getPosition());
+                                AllCards.notifyBookmarkRemoved(holder.getPosition());
                             }
                         }).setNegativeButton(AllCards.getContext().getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
                     @Override
@@ -77,9 +77,9 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.Holder> {
             public void onClick(View v) {
                 Fragment translator = new Translator();
                 Bundle bundle = new Bundle();
-                bundle.putString("fromPosition", AllCards.cards.get(position).getDirectionFrom());
-                bundle.putString("toPosition", AllCards.cards.get(position).getDirectionTo());
-                bundle.putString("sourceText", AllCards.cards.get(position).getText());
+                bundle.putString("fromPosition", AllCards.cards.get(holder.getPosition()).getDirectionFrom());
+                bundle.putString("toPosition", AllCards.cards.get(holder.getPosition()).getDirectionTo());
+                bundle.putString("sourceText", AllCards.cards.get(holder.getPosition()).getText());
                 translator.setArguments(bundle);
                 android.support.v4.app.FragmentTransaction transaction =
                         ((MainActivity) AllCards.getContext()).getSupportFragmentManager().beginTransaction();

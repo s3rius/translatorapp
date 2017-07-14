@@ -28,4 +28,5 @@
     <string name="dictionary">Enable dictionary</string>
     <string name="correspondence">Strict correspondence between translation and text</string>
     <string name="searchAllForms">Search all word forms in dictionary</string>
+    <string name="maybeLang">Maybe you type text on</string>
 </resources>

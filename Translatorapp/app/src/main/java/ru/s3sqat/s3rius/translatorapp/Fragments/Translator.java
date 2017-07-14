@@ -72,6 +72,10 @@ public class Translator extends Fragment {
     ImageView bookmark;
     LinearLayout dictionary;
     boolean linked;
+    TextView hintText;
+    String detected = "";
+    TextView hintLink;
+
 
     public Translator() {
         // Required empty public constructor
@@ -89,6 +93,10 @@ public class Translator extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         locale = Locale.getDefault().getLanguage();
+        hintText = (TextView) view.findViewById(R.id.detectedText);
+        hintLink = (TextView) view.findViewById(R.id.detectedTextLink);
+        hintText.setVisibility(View.GONE);
+        hintLink.setVisibility(View.GONE);
         textBox = (EditText2) view.findViewById(R.id.textToTranslate);
         translation = (TextView) view.findViewById(R.id.translation);
         sPrefs = getActivity().getPreferences(Context.MODE_PRIVATE);
@@ -135,6 +143,12 @@ public class Translator extends Fragment {
                 } else {
                     Toast.makeText(getContext(), getString(R.string.cantMark), Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+        hintLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                spinnerFrom.setSelection(requestLangs.indexOf(detected));
             }
         });
         swapLangsListener();
@@ -250,7 +264,6 @@ public class Translator extends Fragment {
                 final String response = new String(responseBody);
                 JSONObject object;
                 String translate = "";
-                String detected = "";
                 try {
                     object = new JSONObject(response);
                     JSONArray text = object.getJSONArray("text");
@@ -268,7 +281,20 @@ public class Translator extends Fragment {
                         spinnerFrom.setSelection(requestLangs.indexOf(detected));
                         return;
                     }
+                } else {
+                    if (AllCards.isDetectHint()) {
+                        if (!detected.equals(requestFrom)) {
+                            hintLink.setText(languages.get(requestLangs.indexOf(detected)).toLowerCase());
+                            hintLink.setVisibility(View.VISIBLE);
+                            hintText.setVisibility(View.VISIBLE);
+                        } else {
+                            hintLink.setVisibility(View.GONE);
+                            hintText.setVisibility(View.GONE);
+                        }
+                    }
                 }
+
+
                 if (AllCards.isUseDictionary()) {
                     if (!linked) {
                         RequestParams requestParams = new RequestParams();
@@ -305,6 +331,8 @@ public class Translator extends Fragment {
                     } else {
                         bookmark.setImageDrawable(getResources().getDrawable(R.drawable.bookmark, null));
                     }
+                } else {
+                    bookmark.setImageDrawable(getResources().getDrawable(R.drawable.bookmark, null));
                 }
             }
 

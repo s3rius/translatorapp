@@ -47,27 +47,44 @@
             android:id="@+id/textToTranslate"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-
             android:layout_margin="5dp"
             android:background="@drawable/edit_text_shape"
             android:gravity="start"
             android:hint="@string/enterText"
             android:padding="5dp" />
 
+        <TextView
+            android:id="@+id/detectedText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/maybeLang"
+            android:layout_below="@id/textToTranslate" />
+
+        <TextView
+            android:layout_alignBaseline="@id/detectedText"
+            android:textColor="@color/blumine"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@id/detectedText"
+            android:id="@+id/detectedTextLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
         <ImageView
+
             android:id="@+id/bookmarkTranslate"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentEnd="true"
-            android:layout_below="@id/textToTranslate"
+            android:layout_below="@id/detectedText"
             android:src="@drawable/bookmark_big" />
+
 
         <TextView
             android:id="@+id/translation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/bookmarkTranslate"
-            android:layout_below="@id/textToTranslate"
+            android:layout_below="@id/detectedText"
             android:layout_toStartOf="@id/bookmarkTranslate"
             android:textSize="16sp"
             android:textStyle="bold" />
