@@ -94,15 +94,13 @@ public class Translator extends Fragment {
         sPrefs = getActivity().getPreferences(Context.MODE_PRIVATE);
         bookmark = (ImageView) view.findViewById(R.id.bookmarkTranslate);
         dictionary = (LinearLayout) view.findViewById(R.id.dictionaryLayout);
-        RelativeLayout layout = (RelativeLayout) view.findViewById(R.id.focusLayout);
+        final RelativeLayout layout = (RelativeLayout) view.findViewById(R.id.focusLayout);
         layout.setFocusable(true);
         layout.setFocusableInTouchMode(true);
 //        layout.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                if (textBox.hasFocus()) {
-//                    textBox.clearFocus();
-//                }
+//                layout.requestFocus();
 //            }
 //        });
 //        layout.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -118,9 +116,15 @@ public class Translator extends Fragment {
         linked = false;
         translation.setVisibility(View.GONE);
         bookmark.setVisibility(View.GONE);
+//        bookmark.setFocusable(true);
+//        bookmark.setFocusableInTouchMode(true);
         bookmark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int indexOf = AllCards.indexOf(textBox.getText().toString(), requestFrom, requestTo);
+                if (indexOf == -1) {
+                    addCard();
+                }
                 int markedIndex = AllCards.changeMark(textBox.getText().toString(), requestFrom, requestTo);
                 if (markedIndex != -1) {
                     if (AllCards.cards.get(markedIndex).isMark()) {
@@ -137,6 +141,7 @@ public class Translator extends Fragment {
         getLanguages();
         setTranslateListeners();
         setFocusListener();
+
     }
 
     public TextView createLink(TextView targetTextView, String completeString,
@@ -184,12 +189,9 @@ public class Translator extends Fragment {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    Toast.makeText(getContext(), "Unfocused", Toast.LENGTH_SHORT).show();
                     if (!isEmptyOrNull(textBox.getText().toString())) {
                         addCard();
                     }
-                } else {
-                    Toast.makeText(getContext(), "Focused", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -267,7 +269,6 @@ public class Translator extends Fragment {
                         return;
                     }
                 }
-                addCard();
                 if (AllCards.isUseDictionary()) {
                     if (!linked) {
                         RequestParams requestParams = new RequestParams();
@@ -504,6 +505,16 @@ public class Translator extends Fragment {
 
             }
         });
+        if (getArguments() != null) {
+            String fromLanguage = getArguments().getString("fromPosition");
+            String toLanguage = getArguments().getString("toPosition");
+            String CardText = getArguments().getString("sourceText");
+            spinnerFrom.setSelection(requestLangs.indexOf(fromLanguage));
+            spinnerTo.setSelection(requestLangs.indexOf(toLanguage));
+            requestTo = toLanguage;
+            requestFrom = fromLanguage;
+            textBox.setText(CardText);
+        }
     }
 
     public boolean isEmptyOrNull(CharSequence sequence) {

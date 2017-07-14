@@ -74,4 +74,18 @@ public class Card {
     public void changeMark() {
         mark = !mark;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Card) {
+            Card object = (Card) obj;
+            if (text.equals(object.getText()) &&
+                    translate.equals(object.getTranslate()) &&
+                    directionFrom.equals(object.getDirectionFrom()) &&
+                    directionTo.equals(object.getDirectionTo()) &&
+                    mark == object.isMark())
+                return true;
+        }
+        return false;
+    }
 }

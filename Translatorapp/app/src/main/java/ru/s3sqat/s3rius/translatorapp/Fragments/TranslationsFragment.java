@@ -10,18 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-
 import ru.s3sqat.s3rius.translatorapp.AllCards;
-import ru.s3sqat.s3rius.translatorapp.Card;
 import ru.s3sqat.s3rius.translatorapp.R;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class TranslationsFragment extends Fragment {
-
-    ArrayList<Card> lastCards = new ArrayList<>();
 
     public TranslationsFragment() {
         // Required empty public constructor
@@ -32,9 +27,6 @@ public class TranslationsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        for (int i = 0, size = AllCards.cards.size(); i < size; i++) {
-            lastCards.add(new Card(AllCards.cards.get(i)));
-        }
         return inflater.inflate(R.layout.fragment_translations, container, false);
     }
 
@@ -44,8 +36,7 @@ public class TranslationsFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.allCards);
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
-        CardsAdapter adapter = new CardsAdapter(getContext());
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(AllCards.cardsAdapter);
     }
 
     @Override

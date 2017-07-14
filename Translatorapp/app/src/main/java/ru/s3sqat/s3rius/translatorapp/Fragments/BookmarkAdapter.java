@@ -1,6 +1,5 @@
 package ru.s3sqat.s3rius.translatorapp.Fragments;
 
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -11,13 +10,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import ru.s3sqat.s3rius.translatorapp.AllCards;
 import ru.s3sqat.s3rius.translatorapp.MainActivity;
 import ru.s3sqat.s3rius.translatorapp.R;
 
-public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.Holder> {
+/**
+ * Created by s3rius on 14.07.17.
+ */
+
+public class BookmarkAdapter extends RecyclerView.Adapter<BookmarkAdapter.Holder> {
 
 
     @Override
@@ -33,15 +37,16 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.Holder> {
         String direction = AllCards.cards.get(position).getDirectionFrom() + "-" + AllCards.cards.get(position).getDirectionTo();
         holder.direction.setText(direction);
         if (AllCards.cards.get(position).isMark()) {
+            holder.setVisibility(true);
             holder.bookmark.setImageDrawable(AllCards.getContext().getResources().getDrawable(R.drawable.bookmark_yellow_big, null));
         } else {
-            holder.bookmark.setImageDrawable(AllCards.getContext().getResources().getDrawable(R.drawable.bookmark_big, null));
+            holder.setVisibility(false);
         }
         holder.bookmark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AllCards.changeMark(position);
-                AllCards.notifyBookmarkChanged(position);
+                AllCards.notifyCardChanged(position);
                 notifyItemChanged(position);
             }
         });
@@ -59,7 +64,7 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.Holder> {
                             public void onClick(DialogInterface dialog, int which) {
                                 AllCards.removeCard(position);
                                 notifyItemRemoved(position);
-                                AllCards.notifyBookmarkRemoved(position);
+                                AllCards.notifyCardRemoved(position);
                             }
                         }).setNegativeButton(AllCards.getContext().getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
                     @Override
@@ -94,6 +99,7 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.Holder> {
         return AllCards.cards.size();
     }
 
+
     class Holder extends RecyclerView.ViewHolder {
         CardView card;
         TextView text;
@@ -108,6 +114,20 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.Holder> {
             translation = (TextView) itemView.findViewById(R.id.translationCard);
             direction = (TextView) itemView.findViewById(R.id.directionCard);
             bookmark = (ImageView) itemView.findViewById(R.id.bookmarkCard);
+        }
+
+        void setVisibility(boolean isVisible) {
+            RecyclerView.LayoutParams param = (RecyclerView.LayoutParams) itemView.getLayoutParams();
+            if (isVisible) {
+                param.height = LinearLayout.LayoutParams.WRAP_CONTENT;
+                param.width = LinearLayout.LayoutParams.MATCH_PARENT;
+                itemView.setVisibility(View.VISIBLE);
+            } else {
+                itemView.setVisibility(View.GONE);
+                param.height = 0;
+                param.width = 0;
+            }
+            itemView.setLayoutParams(param);
         }
     }
 }

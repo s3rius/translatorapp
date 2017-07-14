@@ -1,0 +1,127 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ru.s3sqat.s3rius.translatorapp.Fragments.SettingsFragment">
+
+
+    <TextView
+        android:id="@+id/TranslationTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/translationSettings"
+        android:textSize="18sp" />
+
+    <View
+        android:id="@+id/translationView"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_below="@id/TranslationTitle"
+        android:background="@color/black" />
+
+    <Switch
+        android:id="@+id/autDetectSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/translationView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/autDetectSwitch"
+        android:layout_below="@id/translationView"
+        android:gravity="center"
+        android:text="@string/autodetect" />
+
+    <View
+        android:id="@+id/secondView"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_below="@id/autDetectSwitch"
+        android:background="@color/black" />
+
+    <Switch
+        android:id="@+id/dictionarySwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/secondView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/dictionarySwitch"
+        android:layout_below="@id/secondView"
+        android:gravity="center"
+        android:text="@string/dictionary" />
+    <View
+        android:id="@+id/thirdView"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_below="@id/dictionarySwitch"
+        android:background="@color/black" />
+
+    <Switch
+        android:id="@+id/familySwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/thirdView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/familySwitch"
+        android:layout_below="@id/thirdView"
+        android:gravity="center"
+        android:text="@string/FamilyFilter" />
+
+    <View
+        android:id="@+id/fourthView"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_below="@id/familySwitch"
+        android:background="@color/black" />
+
+    <Switch
+        android:id="@+id/correspondenceSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/fourthView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/correspondenceSwitch"
+        android:layout_below="@id/fourthView"
+        android:gravity="center"
+        android:text="@string/correspondence" />
+
+    <View
+        android:id="@+id/fifthView"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_below="@id/correspondenceSwitch"
+        android:background="@color/black" />
+
+    <Switch
+        android:id="@+id/morphoSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/fifthView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/morphoSwitch"
+        android:layout_below="@id/fifthView"
+        android:gravity="center"
+        android:text="@string/searchAllForms" />
+
+
+</RelativeLayout>
+

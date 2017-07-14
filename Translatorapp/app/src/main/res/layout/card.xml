@@ -2,16 +2,16 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/cardView"
     android:layout_width="match_parent"
-    android:layout_height="60dp">
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="60dp">
 
         <ImageView
             android:id="@+id/bookmarkCard"
             android:layout_width="40dp"
-            android:layout_height="match_parent"
+            android:layout_height="60dp"
             android:layout_alignParentEnd="true"
             android:src="@drawable/bookmark_big" />
 

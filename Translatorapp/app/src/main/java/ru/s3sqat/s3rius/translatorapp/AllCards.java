@@ -1,5 +1,6 @@
 package ru.s3sqat.s3rius.translatorapp;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -10,12 +11,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import ru.s3sqat.s3rius.translatorapp.Fragments.BookmarkAdapter;
+import ru.s3sqat.s3rius.translatorapp.Fragments.CardsAdapter;
+
 /**
  * Created by s3rius on 13.07.17.
  */
 
 public class AllCards {
     public static ArrayList<Card> cards;
+    public static BookmarkAdapter bookmarkAdapter;
+    public static CardsAdapter cardsAdapter;
     private static boolean useDictionary;
     private static ObjectMapper mapper = new ObjectMapper();
     private static SharedPreferences sharedPreferences;
@@ -25,9 +31,18 @@ public class AllCards {
     private static boolean morpho;
     private static boolean posFilter;
     private static int flags;
-    public static int pops;
+    private static Context context;
 
-    public static void saveCards() {
+    public static Context getContext() {
+        return context;
+    }
+
+    public static void setContext(Context context) {
+        AllCards.context = context;
+        sharedPreferences = ((MainActivity) context).getPreferences(Context.MODE_PRIVATE);
+    }
+
+    private static void saveCards() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         try {
             editor.putString("cards", mapper.writeValueAsString(cards));
@@ -37,11 +52,18 @@ public class AllCards {
         }
     }
 
-    public static void setSharedPreferences(SharedPreferences sharedPreferences) {
-        AllCards.sharedPreferences = sharedPreferences;
+    private static void saveFlags() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("morpho", morpho);
+        editor.putBoolean("autoSwap", autoswap);
+        editor.putBoolean("useDictionary", useDictionary);
+        editor.putBoolean("familyFilter", familyFilter);
+        editor.putBoolean("morpho", morpho);
+        editor.putBoolean("posFilter", posFilter);
+
     }
 
-    public static void loadValues() {
+    static void loadValues() {
         cards = new ArrayList<>();
         if (sharedPreferences.contains("cards")) {
             try {
@@ -58,9 +80,27 @@ public class AllCards {
         morpho = sharedPreferences.getBoolean("morpho", true);
         posFilter = sharedPreferences.getBoolean("posFilter", false);
         createMask();
+        bookmarkAdapter = new BookmarkAdapter();
+        cardsAdapter = new CardsAdapter();
     }
 
-    public static void createMask() {
+    public static void notifyBookmarkChanged(int position) {
+        bookmarkAdapter.notifyItemChanged(position);
+    }
+
+    public static void notifyBookmarkRemoved(int position) {
+        bookmarkAdapter.notifyItemRemoved(position);
+    }
+
+    public static void notifyCardChanged(int position) {
+        cardsAdapter.notifyItemChanged(position);
+    }
+
+    public static void notifyCardRemoved(int position) {
+        cardsAdapter.notifyItemRemoved(position);
+    }
+
+    private static void createMask() {
         flags = 0;
         if (familyFilter)
             flags += 1;
@@ -76,6 +116,7 @@ public class AllCards {
 
     public static void setFamilyFilter(boolean familyFilter) {
         AllCards.familyFilter = familyFilter;
+        saveFlags();
         createMask();
     }
 
@@ -85,6 +126,7 @@ public class AllCards {
 
     public static void setMorpho(boolean morpho) {
         AllCards.morpho = morpho;
+        saveFlags();
         createMask();
     }
 
@@ -94,6 +136,7 @@ public class AllCards {
 
     public static void setPosFilter(boolean posFilter) {
         AllCards.posFilter = posFilter;
+        saveFlags();
         createMask();
     }
 
@@ -155,8 +198,18 @@ public class AllCards {
         return autoswap;
     }
 
+    public static void setAutoswap(boolean autoswap) {
+        AllCards.autoswap = autoswap;
+        saveFlags();
+    }
+
     public static boolean isUseDictionary() {
         return useDictionary;
+    }
+
+    public static void setUseDictionary(boolean useDictionary) {
+        AllCards.useDictionary = useDictionary;
+        saveFlags();
     }
 
     public static void changeMark(int position) {
@@ -166,8 +219,10 @@ public class AllCards {
 
     public static int changeMark(String text, String directionFrom, String directionTo) {
         int index = indexOf(text, directionFrom, directionTo);
-        cards.get(index).changeMark();
-        saveCards();
+        if (index != -1) {
+            cards.get(index).changeMark();
+            saveCards();
+        }
         return index;
     }
 

@@ -5,6 +5,7 @@
     tools:context="ru.s3sqat.s3rius.translatorapp.Fragments.MarkedTranslationsFragment">
 
     <android.support.v7.widget.RecyclerView
+
         android:id="@+id/markedCards"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

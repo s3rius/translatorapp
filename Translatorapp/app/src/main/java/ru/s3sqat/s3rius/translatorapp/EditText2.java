@@ -27,4 +27,8 @@ public class EditText2 extends android.support.v7.widget.AppCompatEditText {
         return super.onKeyPreIme(key_code, event);
     }
 
+    @Override
+    public boolean didTouchFocusSelect() {
+        return super.didTouchFocusSelect();
+    }
 }
